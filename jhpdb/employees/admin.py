@@ -36,13 +36,33 @@ class EmployeeAdmin(VersionAdmin, SimpleHistoryAdmin, ImportExportModelAdmin):
     date_hierarchy = 'hire_date'
     change_list_template = "admin/change_list.html"
 
+class PositionAdmin(VersionAdmin, SimpleHistoryAdmin, ImportExportModelAdmin):
+    fieldsets = [ ('Positions', {'fields': ['department', 'position']})]
+    list_display = ('department', 'position')
+    change_list_template = "admin/change_list.html"
 
+
+class DepartmentAdmin(VersionAdmin, SimpleHistoryAdmin, ImportExportModelAdmin):
+    fieldsets = [ ('Departments', {'fields': ['department']})]
+    list_display = ('department', )
+    change_list_template = "admin/change_list.html"
+
+    
+class ProvinceAdmin(VersionAdmin, SimpleHistoryAdmin, ImportExportModelAdmin):
+    fieldsets = [ ('Provinces', {'fields': ['province']})]
+    list_display = ('province', )
+    change_list_template = "admin/change_list.html"
+
+
+class SiteAdmin(VersionAdmin, SimpleHistoryAdmin, ImportExportModelAdmin):
+    fieldsets = [ ('Sites', {'fields': ['province', 'site']})]
+    list_display = ('province','site')
+    change_list_template = "admin/change_list.html"
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
-
 admin.site.register(Employee, EmployeeAdmin)
-admin.site.register(Province)
-admin.site.register(Site)
-admin.site.register(Department)
-admin.site.register(Position)
+admin.site.register(Province, ProvinceAdmin)
+admin.site.register(Site, SiteAdmin)
+admin.site.register(Department, DepartmentAdmin)
+admin.site.register(Position, PositionAdmin)
