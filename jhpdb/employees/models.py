@@ -5,7 +5,10 @@ from datetime import date
 from django.core.validators import MaxValueValidator, MinValueValidator
 from smart_selects.db_fields import ChainedForeignKey
 from simple_history.models import HistoricalRecords
-
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.utils.timesince import timeuntil
 
 # Create your models here.
 
@@ -113,32 +116,36 @@ class Site(models.Model):
         return self.site
 
 class Employee(models.Model):
-
-    province = models.ForeignKey(Province, null=False, blank=False, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    province = models.ForeignKey(Province, null=True, blank=True, on_delete=models.CASCADE)
     site = ChainedForeignKey('Site',
                             chained_field="province",
                             chained_model_field="province",
                             show_all=False,
+                            null=True, blank=True,
                             auto_choose=True,
                             sort=True
                             )
     hire_date = models.DateField('Date Hired', default = timezone.now)
-    contract = models.IntegerField('Contract Months',default = 1, validators=[MaxValueValidator(100), MinValueValidator(1)])
-    department = models.ForeignKey(Department, null=False, blank=False, on_delete = models.CASCADE)
+    contract = models.IntegerField('Contract Months', default = 1, validators=[MaxValueValidator(100), MinValueValidator(1)])
+    department = models.ForeignKey(Department, null=True, blank=True, on_delete = models.CASCADE)
     position = ChainedForeignKey('Position', 
                                 chained_field="department", 
                                 chained_model_field="department", 
                                 show_all=False, 
+                                null=True, blank=True,
                                 auto_choose=True, 
                                 sort=True
                                 )
     history = HistoricalRecords()
 
-    def still_hired(self):
-        return date.today() <= self.hire_date + datetime.timedelta(days=self.contract*30)
-    still_hired.admin_order_field = 'entry_date'
-    still_hired.boolean = True
-    still_hired.short_description = 'Still hired?'
+    def timeuntil_out_of_contract(self):
+        if date.today() >= self.hire_date + datetime.timedelta(days=self.contract*30):
+            return ('Out of contract')
+        else:
+            return (timeuntil(self.hire_date + datetime.timedelta(days=self.contract*29)) , 'left')
+    timeuntil_out_of_contract.admin_order_field = 'entry_date'
+    timeuntil_out_of_contract.short_description = 'Contract info'
 
     def is_hired_recently(self):
         return self.hire_date >= date.today() - datetime.timedelta(days = 7)
@@ -146,6 +153,11 @@ class Employee(models.Model):
     is_hired_recently.boolean = True
     is_hired_recently.short_description = 'Hired recently?'
 
+    def __str__(self):
+        return self.user.username
 
-    # def __str__(self):
-    #     return self.hire_date
+@receiver(post_save, sender=User)
+def create_or_update_user_employee(sender, instance, created, **kwargs):
+    if created:
+        Employee.objects.create(user=instance)
+    instance.employee.save()
