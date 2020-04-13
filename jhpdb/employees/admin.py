@@ -32,7 +32,6 @@ class EmployeeAdmin(VersionAdmin, SimpleHistoryAdmin, ImportExportModelAdmin):
     fieldsets = [ ('Employee Information', {'fields': ['user', 'province', 'site', 'department','position','hire_date','contract']})]
     list_display = [ 'user','department','position', 'province','site', 'hire_date', 'contract','is_hired_recently', 'timeuntil_out_of_contract']
     list_filter = ['department', 'position']
-    # search_fields = ['first_name', 'last_name']
     date_hierarchy = 'hire_date'
     change_list_template = "admin/change_list.html"
 
