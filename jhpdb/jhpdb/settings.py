@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     # local apps
     'employees.apps.EmployeesConfig',
+    'items.apps.ItemsConfig',
+    
     #pip installed apps
     'crispy_forms',
     'smart_selects',

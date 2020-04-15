@@ -161,3 +161,6 @@ def create_or_update_user_employee(sender, instance, created, **kwargs):
     if created:
         Employee.objects.create(user=instance)
     instance.employee.save()
+
+# def __init__(self, *args, **kwargs):
+        # super(Base, self).__init__(*args, **kwargs)
