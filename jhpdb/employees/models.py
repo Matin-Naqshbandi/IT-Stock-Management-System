@@ -117,23 +117,21 @@ class Site(models.Model):
 
 class Employee(models.Model):
     # user = models.OneToOneField(User, on_delete=models.CASCADE)
-    province = models.ForeignKey(Province, null=True, blank=True, on_delete=models.CASCADE)
-    site = ChainedForeignKey('Site',
+    province = models.ForeignKey(Province, on_delete=models.CASCADE)
+    site = ChainedForeignKey(Site,
                             chained_field="province",
                             chained_model_field="province",
                             show_all=False,
-                            null=True, blank=True,
                             auto_choose=True,
                             sort=True
                             )
     hire_date = models.DateField('Date Hired', default = timezone.now)
     contract = models.IntegerField('Contract Months', default = 1, validators=[MaxValueValidator(100), MinValueValidator(1)])
-    department = models.ForeignKey(Department, null=True, blank=True, on_delete = models.CASCADE)
-    position = ChainedForeignKey('Position', 
+    department = models.ForeignKey(Department, on_delete = models.CASCADE)
+    position = ChainedForeignKey(Position, 
                                 chained_field="department", 
                                 chained_model_field="department", 
                                 show_all=False, 
-                                null=True, blank=True,
                                 auto_choose=True, 
                                 sort=True
                                 )
