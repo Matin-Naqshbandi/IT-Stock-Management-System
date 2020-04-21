@@ -116,7 +116,7 @@ class Site(models.Model):
         return self.site
 
 class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # user = models.OneToOneField(User, on_delete=models.CASCADE)
     province = models.ForeignKey(Province, null=True, blank=True, on_delete=models.CASCADE)
     site = ChainedForeignKey('Site',
                             chained_field="province",
@@ -156,11 +156,14 @@ class Employee(models.Model):
     def __str__(self):
         return self.user.username
 
-@receiver(post_save, sender=User)
-def create_or_update_user_employee(sender, instance, created, **kwargs):
-    if created:
-        Employee.objects.create(user=instance)
-    instance.employee.save()
+# @receiver(post_save, sender=User)
+# def create_or_update_user_employee(sender, instance, created, **kwargs):
+#     if created:
+#         Employee.objects.create(user=instance)
+#     instance.employee.save()
+
+
+
 
 # def __init__(self, *args, **kwargs):
         # super(Base, self).__init__(*args, **kwargs)

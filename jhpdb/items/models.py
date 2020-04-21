@@ -5,20 +5,25 @@ from smart_selects.db_fields import ChainedManyToManyField, ChainedForeignKey
 
 class Manufacturer(models.Model):
     name = models.CharField(max_length=255, null=False, blank=False, unique=True)
+    def __str__(self):
+        return self.name
 
 class Category(models.Model):
     category = models.CharField(max_length=255, null=False, blank=False)
     manufacturers = models.ManyToManyField('Manufacturer')
+    def __str__(self):
+        return self.category
 
 class Model(models.Model):
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
-    category = ChainedManyToManyField(
+    category = ChainedForeignKey(
         Category,
-        horizontal=True,
         chained_field = 'manufacturer',
         chained_model_field = 'manufacturers',
     )
     model = models.CharField(max_length=255, null=False, blank=False)
+    def __str__(self):
+        return self.model
 
 class Item(models.Model):
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
@@ -27,18 +32,23 @@ class Item(models.Model):
         chained_field="manufacturer", 
         chained_model_field="manufacturers", 
         auto_choose=True, 
+        show_all=False,
         sort=True
     )
     model = ChainedForeignKey(
         Model, 
+        # related_name='model',
         chained_field="category", 
         chained_model_field="category", 
+        limit_choices_to = {'model__startswith': 'i'},
         auto_choose=True, 
+        show_all=False,
         sort=True
     )
     serial = models.CharField(max_length=255)
     tag_no = models.IntegerField(null=False, blank=False)
-
+    def __str__(self):
+        return self.serial
 
 
 
