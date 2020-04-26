@@ -1,4 +1,5 @@
 {% extends "admin/base.html" %}
+<!-- {% load static %} -->
 
 {% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
@@ -7,3 +8,6 @@
 {% endblock %}
 
 {% block nav-global %}{% endblock %}
+<!-- <script src="{% static 'smart-selects/admin/js/bindfields.js' %}" type="text/javascript" charset="utf-8"></script>
+<script src="{% static 'smart-selects/admin/js/chainedfk.js' %}" type="text/javascript" charset="utf-8"></script>
+<script src="{% static 'smart-selects/admin/js/chainedm2m.js' %}" type="text/javascript" charset="utf-8"></script> -->
