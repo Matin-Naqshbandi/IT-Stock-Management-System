@@ -19,7 +19,7 @@ class Department(models.Model):
         return self.department
 
 class Position(models.Model):
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    department = models.ForeignKey(Department, on_delete=models.PROTECT)
     position = models.CharField(max_length=255)
     history = HistoricalRecords()
 
@@ -106,7 +106,7 @@ class Province(models.Model):
         return self.province
 
 class Site(models.Model):
-    province = models.ForeignKey(Province, on_delete=models.CASCADE)
+    province = models.ForeignKey(Province, on_delete=models.PROTECT)
     site = models.CharField(max_length=255)
     history = HistoricalRecords()
     class Meta:
@@ -116,8 +116,8 @@ class Site(models.Model):
         return self.site
 
 class Employee(models.Model):
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
-    province = models.ForeignKey(Province, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.PROTECT)
+    province = models.ForeignKey(Province, on_delete=models.PROTECT)
     site = ChainedForeignKey(Site,
                             chained_field="province",
                             chained_model_field="province",
@@ -127,7 +127,7 @@ class Employee(models.Model):
                             )
     hire_date = models.DateField('Date Hired', default = timezone.now)
     contract = models.IntegerField('Contract Months', default = 1, validators=[MaxValueValidator(100), MinValueValidator(1)])
-    department = models.ForeignKey(Department, on_delete = models.CASCADE)
+    department = models.ForeignKey(Department, on_delete = models.PROTECT)
     position = ChainedForeignKey(Position, 
                                 chained_field="department", 
                                 chained_model_field="department", 
