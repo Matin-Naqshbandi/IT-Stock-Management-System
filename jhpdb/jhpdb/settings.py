@@ -50,8 +50,8 @@ INSTALLED_APPS = [
     'import_export',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.microsoft',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.microsoft',
 
 ]
 
@@ -176,7 +176,7 @@ ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
 ACCOUNT_USERNAME_BLACKLIST =['admin','administrator'] #list of accounts that can't be made 
 
 # # Provider specific settings
-SOCIALACCOUNT_PROVIDERS = {
-    'microsoft': {
-    }
-}
+# SOCIALACCOUNT_PROVIDERS = {
+#     'microsoft': {
+#     }
+# }
