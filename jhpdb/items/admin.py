@@ -21,16 +21,19 @@ class ItemAdmin(admin.ModelAdmin):
     inlines = [SpecInfoInline]
     list_filter = ['manufacturer', 'category', 'model',]
     search_fields = ['serial', 'tag_no']
+    # This will help you to disable change functionality
+    def has_add_permission(self, request, obj=None):
+        return False
 
 class CategoryAdmin(admin.ModelAdmin):
-    fieldsets = [('Category Information: ', {'fields': ['category', 'manufacturers']})]
-    list_display = ['category']
+    fieldsets = [('Category Information: ', {'fields': ['name', 'manufacturers']})]
+    list_display = ['name']
     filter_horizontal = ['manufacturers',]
     list_filter = ['manufacturers',]
 
 class ModelAdmin(admin.ModelAdmin):
-    fieldsets = [('Model Information: ', {'fields': ['manufacturer', 'category', 'model', 'expendable']})]
-    list_display = ['model', 'category', 'manufacturer', 'expendable']
+    fieldsets = [('Model Information: ', {'fields': ['manufacturer', 'category', 'name', 'item_count', 'expendable']})]
+    list_display = ['name', 'category', 'manufacturer', 'item_count', 'item_in_stock', 'item_assigned', 'item_expended','item_lost', 'item_damaged', 'expendable']
     list_filter = ['category', 'manufacturer', 'expendable']
 
 class ItemAssignAdmin(admin.ModelAdmin):
@@ -40,8 +43,9 @@ class ItemAssignAdmin(admin.ModelAdmin):
     date_hierarchy = 'received_date'
     raw_id_fields = ('item','assign_to')
     exclude = ('assign_by', 'received_by',)
-    def save_model(self, request, obj, form, change):
-        if obj.assign_status=='0':
+    #only Assign items when Assign is selected as ItemAssign Status
+    def save_model(self, request, obj, form, change): 
+        if obj.assign_status=='0': 
             obj.assign_by = request.user.employee;
         if obj.assign_status!='0':
             obj.received_by = request.user.employee;

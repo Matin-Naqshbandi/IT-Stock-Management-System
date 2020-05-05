@@ -5,6 +5,8 @@ from django.utils import timezone
 import datetime
 from datetime import date
 from .validators import validate_future
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 # Create your models here.
 
 class Manufacturer(models.Model):
@@ -13,25 +15,45 @@ class Manufacturer(models.Model):
         return self.name
 
 class Category(models.Model):
-    category = models.CharField(max_length=255, null=False, blank=False)
+    name = models.CharField(max_length=255, null=False, blank=False)
     manufacturers = models.ManyToManyField('Manufacturer')
     def __str__(self):
-        return self.category
+        return self.name
 
 class Model(models.Model):
-    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
+    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.PROTECT)
     category = ChainedForeignKey(
         Category,
         chained_field = 'manufacturer',
         chained_model_field = 'manufacturers',
+        auto_choose=True, 
+        show_all=False,
+        sort=True
     )
-    model = models.CharField(max_length=255, null=False, blank=False)
+    name = models.CharField(max_length=255, null=False, blank=False, unique=True)
     expendable = models.BooleanField(default=False)
+    item_count = models.IntegerField(default=1)
+
+    def item_in_stock(self):
+        return Item.objects.filter(model=self.pk, status='In stock').count()
+    item_in_stock.short_description = 'In Stock'
+    def item_assigned(self):
+        return Item.objects.filter(model=self.pk, status__contains='Assign to ').count()
+    item_assigned.short_description = 'Assigned'
+    def item_expended(self):
+        return Item.objects.filter(model=self.pk, status__contains='Expended by ').count()
+    item_expended.short_description = 'Expended'
+    def item_lost(self):
+        return Item.objects.filter(model=self.pk, status__contains='Lost by ').count()
+    item_lost.short_description = 'Lost'
+    def item_damaged(self):
+        return Item.objects.filter(model=self.pk, status__contains='Damaged by ').count()
+    item_damaged.short_description = 'Damaged'
     def __str__(self):
-        return self.model
+        return self.name
 
 class Item(models.Model):
-    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
+    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.PROTECT)
     category = ChainedForeignKey(
         Category, 
         chained_field="manufacturer", 
@@ -53,7 +75,7 @@ class Item(models.Model):
     note = models.TextField(max_length=1024, null=True, blank=True)
     status = models.CharField(max_length=255, default='In stock')
     def __str__(self):
-        return (self.manufacturer.name+" "+self.model.model)
+        return (self.manufacturer.name+" "+self.model.name)
 
 class SpecList(models.Model):
     name = models.CharField(max_length=255)
@@ -101,5 +123,4 @@ class ItemAssign(models.Model):
             raise Exception('Invalid Entry! (from items.models.ItemAssign.save)')
 
     def __str__(self):
-        return (self.item.manufacturer.name+" "+self.item.model.model)
-
+        return (self.item.manufacturer.name+" "+self.item.model.name)
