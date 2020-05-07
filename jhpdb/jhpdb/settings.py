@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'import_export',
     'allauth',
     'allauth.account',
-    # 'allauth.socialaccount',
+    'allauth.socialaccount',
     # 'allauth.socialaccount.providers.microsoft',
 
 ]

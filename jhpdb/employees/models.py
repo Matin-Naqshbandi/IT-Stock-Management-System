@@ -19,10 +19,8 @@ class Position(models.Model):
     department = models.ForeignKey(Department, on_delete=models.PROTECT)
     position = models.CharField(max_length=255)
     history = HistoricalRecords()
-
     class Meta:
         unique_together = ('department', 'position')
-
     def __str__(self):
         return self.position
     
@@ -108,7 +106,6 @@ class Site(models.Model):
     history = HistoricalRecords()
     class Meta:
         unique_together = ('province', 'site')
-
     def __str__(self):
         return self.site
 
@@ -150,8 +147,3 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.user.username
-
-
-
-# def __init__(self, *args, **kwargs):
-        # super(Base, self).__init__(*args, **kwargs)

@@ -1,9 +1,10 @@
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_save, pre_delete, post_delete
 from django.utils import timezone
-from .models import Item, ItemAssign, Model
+from .models import Item, ItemAssign, Model, SpecInfo
 from django.db.models import F
 from django.core.exceptions import ValidationError
+import re
 
 @receiver(pre_save, sender=ItemAssign)
 def assign_by_IT(sender, instance, **kwargs):
@@ -71,3 +72,8 @@ def Create_Model_Items(sender, instance, created, **kwargs):
             Item.objects.create(manufacturer=instance.manufacturer, category=instance.category, model=instance)
     else:
         raise ValidationError('Invalid Entry! (from items.signals.Create_Model_Items)')
+
+@receiver(pre_save, sender=SpecInfo)
+def validate_mac_address(sender, instance, **kwargs):
+    if(('mac' in instance.spec.name.lower()) and ('address' in instance.spec.name.lower()) and (not re.match(r'(?:[0-9a-fA-F]:?){12}', instance.info))):
+        raise ValidationError('Invalid Mac Address')
