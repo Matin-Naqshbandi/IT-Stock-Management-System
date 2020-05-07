@@ -1,7 +1,7 @@
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_save, pre_delete, post_delete
 from django.utils import timezone
-from .models import Item, ItemAssign, Model, SpecInfo
+from .models import Item, ItemAssign, Model, SpecInfo, PersonalDevice
 from django.db.models import F
 from django.core.exceptions import ValidationError
 import re
@@ -76,4 +76,9 @@ def Create_Model_Items(sender, instance, created, **kwargs):
 @receiver(pre_save, sender=SpecInfo)
 def validate_mac_address(sender, instance, **kwargs):
     if(('mac' in instance.spec.name.lower()) and ('address' in instance.spec.name.lower()) and (not re.match(r'(?:[0-9a-fA-F]:?){12}', instance.info))):
+        raise ValidationError('Invalid Mac Address')
+
+@receiver(pre_save, sender=PersonalDevice)
+def validate_mac_address(sender, instance, **kwargs):
+    if(not re.match(r'(?:[0-9a-fA-F]:?){12}', instance.mac)):
         raise ValidationError('Invalid Mac Address')
