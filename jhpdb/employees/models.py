@@ -7,6 +7,8 @@ from smart_selects.db_fields import ChainedForeignKey
 from simple_history.models import HistoricalRecords
 from django.contrib.auth.models import User
 from django.utils.timesince import timeuntil
+from django.core.validators import RegexValidator
+
 # Create your models here.
 
 class Department(models.Model):
@@ -129,6 +131,14 @@ class Employee(models.Model):
                                 auto_choose=True, 
                                 sort=True, default=10#default=NotSpecified
                                 )
+    phonenumber = models.CharField(max_length=10, null=True, blank=True, unique=True, validators=[RegexValidator
+                                                                            (regex='[0][7][024789][0-9]{7}',
+                                                                            message='Invalid Afghanistan Phone number',
+                                                                            code='invalid_phone_number'),])
+    skype = models.CharField(max_length=31, null=True, blank=True, unique=True, validators=[RegexValidator
+                                                                            (regex='[a-zA-Z][a-zA-Z0-9\.,\-_]{5,31}',
+                                                                            message='Invalid Skype ID',
+                                                                            code='invalid_skype_id'),])
     history = HistoricalRecords()
 
     def timeuntil_out_of_contract(self):
@@ -147,3 +157,15 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class ExtensionNumber(models.Model):
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    office = models.CharField(max_length=255)
+    extension_number = models.CharField(max_length=3, unique=True, validators=[RegexValidator
+                                                                            (regex='[6][0-4][0-9]',
+                                                                            message='Invalid Extension number',
+                                                                            code='invalid_extension_number'),])
+    history = HistoricalRecords()
+    def __str__(self):
+        return self.extension_number
+    

@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from .models import Employee
 from allauth.account.models  import EmailAddress
+from django.core.exceptions import ValidationError
 
 @receiver(post_save, sender=User)
 def create_user_employee(sender, instance, created, **kwargs):
