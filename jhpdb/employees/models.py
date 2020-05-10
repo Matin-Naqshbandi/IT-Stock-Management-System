@@ -132,7 +132,7 @@ class Employee(models.Model):
                                 sort=True, default=10#default=NotSpecified
                                 )
     phonenumber = models.CharField(max_length=10, null=True, blank=True, unique=True, validators=[RegexValidator
-                                                                            (regex='[0][7][024789][0-9]{7}',
+                                                                            (regex='[0][7][02346789][0-9]{7}',
                                                                             message='Invalid Afghanistan Phone number',
                                                                             code='invalid_phone_number'),])
     skype = models.CharField(max_length=31, null=True, blank=True, unique=True, validators=[RegexValidator
