@@ -1,0 +1,1 @@
+# default_app_config = 'jhpdb.items.apps.ItemsConfig'

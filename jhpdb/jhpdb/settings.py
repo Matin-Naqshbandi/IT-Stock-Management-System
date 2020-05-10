@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django.contrib.sites', #needed for django-allauth
     # local apps
     'employees.apps.EmployeesConfig',
     'items.apps.ItemsConfig',
@@ -48,7 +48,13 @@ INSTALLED_APPS = [
     'reversion',
     'simple_history',
     'import_export',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.microsoft',
+
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -72,13 +78,23 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                'django.template.context_processors.request', #needed for django-allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = ( #added for django-allauth
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
+)
 
 WSGI_APPLICATION = 'jhpdb.wsgi.application'
 
@@ -142,3 +158,25 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 USE_DJANGO_JQUERY = True
+
+# Django Allauth from here:
+SITE_ID = 1 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# LOGIN_REDIRECT_URL = '/'
+# ACCOUNT_LOGOUT_REDIRECT_URL = (portal)
+
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_EMAIL_VERIFICATION = ("mandatory", "optional", or "none")
+# ACCOUNT_SIGNUP_FORM_CLASS = (e.g. ‘myapp.forms.SignupForm’) #for entering additional information after sign in newsletter or birthday
+ACCOUNT_PRESERVE_USERNAME_CASING = False #store usernames in lowercase
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
+
+ACCOUNT_USERNAME_BLACKLIST =['admin','administrator'] #list of accounts that can't be made 
+
+# # Provider specific settings
+# SOCIALACCOUNT_PROVIDERS = {
+#     'microsoft': {
+#     }
+# }
