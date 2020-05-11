@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>jhpiego - {% block head_title %}{% endblock %}</title>
+  {% block extra_head %}
+  {% endblock %}
+  <link rel="stylesheet" href="{% static 'employees/allauth/style.css' %}">
+  <link rel="icon" type="image/gif" href="{% static 'employees/portal/images/icon.gif' %}">
+
+</head>
+<body>
+
+<!-- partial:index.partial.html -->
+<!--
+Author: Colorlib
+Author URL: https://colorlib.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //Custom Theme files -->
+<!-- web font -->
+<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+<!-- //web font -->
+</head>
+<body>
+
+	<!-- main -->
+	<div class="main-w3layouts wrapper">
+		<!-- <h1>Creative SignUp Form</h1> -->
+		{% block body %}
+		{% if messages %}
+		<div>
+			<strong>Messages:</strong>
+			<ul>
+			  {% for message in messages %}
+			  <li>{{message}}</li>
+			  {% endfor %}
+			</ul>
+		  </div>
+		  {% endif %}
+	
+		  <!-- <div>
+			<strong>Menu:</strong>
+			<ul>
+			  {% if user.is_authenticated %}
+			  <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+			  <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+			  {% else %}
+			  <li><a href="{% url 'account_login' %}">Sign In</a></li>
+			  <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+			  {% endif %}
+			</ul>
+		  </div> -->
+			<a href="{% url 'employees:index' %}"><img src="{% static 'employees/allauth/jhpiego-logo-transparent.png' %}" style="width: 15%; margin: -20px 42.5% -20px; opacity: 0.9;", alt="jhpiego logo"></a>
+
+		<div class="main-agileinfo" style="border-radius: 10px; color: white;">
+			<div class="agileits-top">
+				{% block content %}
+				{% endblock %}
+				{% endblock %}
+				{% block extra_body %}
+				{% endblock %}
+
+			</div>
+		</div>
+		<!-- copyright -->
+		<div class="colorlibcopy-agile">
+			<p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Colorlib</a></p>
+		</div>
+		<!-- //copyright -->
+		<ul class="colorlib-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<!-- //main -->
+</body>
+</html>
+<!-- partial -->
+
+</body>
+</html>
