@@ -1,0 +1,313 @@
+<!--Designed By Matin Naqshbandi-->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  {% load static %}
+  <!--CDN Links-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!--Local Links-->
+  <link rel="icon" type="image/gif" href="{% static 'employees/portal/images/icon.gif' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'employees/portal/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'employees/portal/bootstrap/css/datatables.bootstrap.min.css' %}">
+  <script type="text/javascript" language="javascript" src="{% static 'employees/portal/bootstrap/js/jquery-3.3.1.js' %}"></script>
+  <script type="text/javascript" language="javascript" src="{% static 'employees/portal/bootstrap/js/jquery.dataTables.min.js' %}"></script>
+  <script type="text/javascript" language="javascript" src="{% static 'employees/portal/bootstrap/js/dataTables.bootstrap.min.js' %}"></script>
+
+
+  <meta charset="utf-8">
+  <!-- no cache -->
+  <meta http-equiv="Pragma" content="no-cache" />
+
+  <title>Personal Contacts</title>
+
+  <script type="text/javascript" class="init">
+
+  // jquery with autonumbering, ordering and search
+  $(document).ready(function() {
+    var t = $('#example').DataTable( {
+      "columnDefs": [ {
+        "searchable": true,
+        "orderable": false,
+        "targets": 0
+      } ],
+      "order": [[ 0, 'asc' ]]
+    } );
+
+    // t.on( 'order.dt search.dt', function () {
+    //     t.column(4, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+    //         cell.innerHTML = i+1;
+    //     } );
+    // } ).draw();
+  } );
+
+  </script>
+
+  <style type="text/css" class="init">
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  ::-ms-scrollbar{
+    display: none;
+  }
+  html{
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    overflow: scroll;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  @keyframes onload {
+    0%{
+      opacity: 0;
+    }
+
+    100%{
+      opacity: 1;
+    }
+  }
+  body{
+    animation-name: onload;
+    animation-duration: 0.5s;
+    background-image: linear-gradient(180deg, #fdfbfb 0%, #ebedee 100%);
+    background-attachment: fixed;
+    /* new codes for not repeating background-image */
+    background-repeat: no-repeat !important;
+    background-position: left top;
+  }
+  #first-row{
+    margin: 0.5% auto;
+  }
+  #first-row h2{
+    color: #02647B;
+  }
+  .data-table{
+    float: left;
+    display: inline;
+    background-color: #fff;
+    padding: 1.5% 2% 1%;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px 1px rgb(200, 200, 200);
+    font-size: 1.2vw;
+    margin: 0 2% 2%;
+    width: 80%;
+  }
+
+  .logo-d{
+    margin: 0 auto 0 42%;
+  }
+  .logo-d h2{
+    float: left;
+    margin-right: 1%;
+    color: #253a4f;
+  }
+  #second-row{
+    clear: both;
+  }
+  .back{
+    color: #02647B;
+    text-align: center;
+    margin: 0.5% auto auto 5%;
+    display: inline;
+    float: left;
+    background-color: white;
+    border-radius: 40px;
+    padding:0.5% 0.7% 0;
+    box-shadow: 0px 0px 5px 3px rgb(200, 200, 200);
+    font-size: 2vw;
+    transition: 250ms;
+  }
+
+  .back:active{
+    box-shadow: 0px 0px 5px 1px rgb(200, 200, 200);
+    font-size: 1.8vw;
+    transition: 250ms;
+
+  }
+
+  .switch{
+    color: #02647B;
+    text-align: center;
+    margin: 0.5% 3% auto auto ;
+    display: inline;
+    float: left;
+    background-color: white;
+    border-radius: 40px;
+    padding:0.5% 0.7% 0;
+    box-shadow: 0px 0px 5px 3px rgb(200, 200, 200);
+    font-size: 2vw;
+    transition: 250ms;
+  }
+
+  .switch:active{
+    box-shadow: 0px 0px 5px 1px rgb(200, 200, 200);
+    font-size: 1.8vw;
+    transition: 250ms;
+
+  }
+
+  table td, th{
+    text-align: left;
+    direction: ltr;
+    font-size: 1.2vw;
+  }
+
+
+  @media screen and (max-width: 980px) {
+    .back{
+      display: none;
+    }
+    .switch{
+      display: none;
+    }
+    .data-table{
+      margin: 0% 5% 10%;
+      width: 90%;
+    }
+    table th{
+      font-size: 3vw;
+    }
+    table td{
+      font-size: 3vw;
+      text-align: right;
+      direction: rtl;
+    }
+    a{
+      font-size: 2vw;
+    }
+    #t, #n, #a, #r, #s{
+      text-align: center;
+    }
+  }
+  @media screen and (max-width: 375px) {
+    .back{
+      display: none;
+    }
+    .switch{
+      display: none;
+    }
+    table td, th{
+      font-size: 3vw;
+      text-align: center;
+      direction: rtl;
+    }
+    a{
+      font-size: 1vw;
+    }
+  }
+  </style>
+
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row" id="first-row">
+      <div class="logo-d">
+        <a href="{% url 'employees:extension_numbers' %}"><h2><span class="glyphicon glyphicon-phone"></span> Personal Contacts</h2></a>
+      </div>
+    </div>
+
+    <div class="row" id="second-row">
+      <a href="{% url 'employees:index' %}">
+        <div class="back">
+          <span class="glyphicon glyphicon-menu-left"></span>
+        </div>
+      </a>
+
+      <div class="data-table">
+        <div class="row">
+
+          <div class="col-sm-12">
+            <table id="example" class="table table-striped table-bordered dataTable" style="width: 100%; text-align: left; border-radius: 5px;" role="grid" autofocus="autofocus" aria-describedby="example_info">
+              <thead>
+                <tr role="row">
+                  <th class="sorting_asc" id="t" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 10px;">Department</</th>
+                  <th class="sorting" id="n" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 250px;">Position</th>
+                  <th class="sorting" id="n" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 250px;">Name</th>
+                  <th class="sorting" id="n" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 250px;">Phone</th>
+                  <th class="sorting" id="r" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 170px;">Skype</th>
+                  <!-- <th class="sorting" id="s" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 10px;">&nbspشماره</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1003</td>
+                  <td>محترمه راحله نضرابی</td>
+                  <td>آمریت تدارکات</td>
+                  <td>تدارکات</td>
+                  <td>تدارکات</td>
+                </tr><tr>
+                  <td>1000</td>
+                  <td>محترم مهروند سنگ</td>
+                  <td>one stop shop</td>
+                  <td>رسپشن</td>
+                  <td>رسپشن</td>
+                </tr><tr>
+                  <td>1018</td>
+                  <td>محترمه کامله صدیقی</td>
+                  <td>one stop shop</td>
+                  <td>بورد شکایات</td>
+                  <td>بورد شکایات</td>
+                </tr><tr>
+                  <td>1024</td>
+                  <td>محترم احمدالله عزیز</td>
+                  <td>one stop shop</td>
+                  <td>بورد تعیینات</td>
+                  <td>بورد تعیینات</td>
+                </tr><tr>
+                  <td>1007</td>
+                  <td>محترم دلاور احمدزی</td>
+                  <td>آمریت اسناد ارتباط</td>
+                  <td>ریاست دارالانشا</td>
+                  <td>ریاست دارالانشا</td>
+                </tr><tr>
+                  <td>1004</td>
+                  <td>Reception</td>
+                  <td>مدیریت عمومی پذیرش</td>
+                  <td>ریاست دارالانشا</td>
+                  <td>ریاست دارالانشا</td>
+                </tr><tr>
+                  <td>1007</td>
+                  <td>محترم دلاور احمدزی</td>
+                  <td>آمریت اسناد ارتباط</td>
+                  <td>ریاست دارالانشا</td>
+                  <td>ریاست دارالانشا</td>
+                </tr><tr>
+                  <td>1004</td>
+                  <td>Reception</td>
+                  <td>مدیریت عمومی پذیرش</td>
+                  <td>ریاست دارالانشا</td>
+                  <td>ریاست دارالانشا</td>
+                </tr><tr>
+                  <td>1007</td>
+                  <td>محترم دلاور احمدزی</td>
+                  <td>آمریت اسناد ارتباط</td>
+                  <td>ریاست دارالانشا</td>
+                  <td>ریاست دارالانشا</td>
+                </tr><tr>
+                  <td>1004</td>
+                  <td>Reception</td>
+                  <td>مدیریت عمومی پذیرش</td>
+                  <td>ریاست دارالانشا</td>
+                  <td>ریاست دارالانشا</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <a href="{% url 'employees:extension_numbers' %}">
+        <div class="switch">
+          <span class="glyphicon glyphicon-phone-alt"></span>
+        </div>
+      </a>
+    </div>
+
+
+
+
+  </body>
+
+  </html>

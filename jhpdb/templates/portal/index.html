@@ -1,0 +1,205 @@
+<!--Designed By Matin Naqshbandi-->
+<!--Jhpiego LOCAL WEB PORTAL-->
+<!--ICT Department-->
+<!--Version 4.0-->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <title>Jhpiego Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Istok+Web:wght@700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/gif" href="{% static 'employees/portal/images/icon.gif' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'employees/portal/bootstrap/css/bootstrap.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'employees/portal/bootstrap/css/jhpiego.portal.css' %}">
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <script type="text/javascript" language="javascript" src="{% static 'employees/portal/bootstrap/js/jquery-3.3.1.js' %}"></script>
+
+  <!-- no cache -->
+  <meta http-equiv="Pragma" content="no-cache">
+
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row align-items-center">
+
+      <div class="col-lg-3" id="ls">
+        <div class="links">
+
+          <!-- <h2>لینک ها</h2> -->
+          <div class="tooltip show"><a href="https://www.office.com/?auth=2"><img src="{% static 'employees/portal/images/links/microsoft365.svg' %}" alt="office-logo"></a><span class="tooltiptext tooltip-right">M365</span></div>
+          <div class="tooltip show"><a href="https://jhpiego.na2.echosign.com/public/samlConsume"><img src="{% static 'employees/portal/images/links/sign.png' %}" alt="sign-logo"></a><span class="tooltiptext tooltip-right">Adobe Sign</span></div>
+          <div class="tooltip show"><a href="https://mail.google.com//"><img src="{% static 'employees/portal/images/links/gmail.svg' %}" alt="gmail-logo"></a><span class="tooltiptext tooltip-right">Gmail</span></div>
+          <div class="tooltip show"><a href="https://mail.yahoo.com/"><img src="{% static 'employees/portal/images/links/yahoo.svg' %}" alt="yahoo-logo"></a><span class="tooltiptext tooltip-right">Yahoo Mail</span></div>
+          <div class="tooltip show"><a href="https://outlook.live.com/mail/inbox"><img src="{% static 'employees/portal/images/links/outlook.svg' %}" alt="outlook-logo"></a><span class="tooltiptext tooltip-right">Outlook</span></div>
+          <div class="tooltip show"><a href="https://www.facebook.com/"><img src="{% static 'employees/portal/images/links/facebook.svg' %}" alt="facebook-logo"></a><span class="tooltiptext tooltip-right">Facebook</span></div>
+          <div class="tooltip show"><a href="https://web.whatsapp.com/"><img src="{% static 'employees/portal/images/links/whatsapp.svg' %}" alt="whatsapp-logo"></a><span class="tooltiptext tooltip-right">WhatsApp</span></div>
+          <div class="tooltip show"><a href="https://www.youtube.com/"><img src="{% static 'employees/portal/images/links/youtube.svg' %}" alt="youtube-logo"></a><span class="tooltiptext tooltip-right">YouTube</span></div>
+          <div class="tooltip show"><a href="https://www.twitter.com/"><img src="{% static 'employees/portal/images/links/twitter.svg' %}" alt="twitter-logo"></a><span class="tooltiptext tooltip-right">Twitter</span></div>
+          <hr style="margin: 5px 0;">
+          <div class="tooltip show"><a href="{% static 'employees/portal/files/Outlook Signature.docx' %}" download><img src="{% static 'employees/portal/images/downloads/msoutlook.svg' %}" alt="Microsoft Outlook Signature"></a><span class="tooltiptext tooltip-right">Email Signature</span></div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+
+        <div class="row">
+          <div class="logo">
+            <a href="https://www.jhpiego.org/">
+              <div style="width:100%;">
+                <img src="{% static 'employees/portal/images/jhpiego-logo-transparent.png' %}" alt="Jhpiego Logo" id=index-logo>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="google-search">
+          <form class="g-s" action="https://www.google.com/search" method="get">
+            <div class="row">
+              <div class="col-80">
+                <input type="text" name="q" tabindex="-1" autofocus="autofocus" placeholder="Search Google">
+              </div>
+              <div class="col-20">
+                <button type="submit" name="button"><img style="max-width: 37px; margin-top: -9px;" src="{% static 'employees/portal/images/google.png' %}" alt=""></button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="portals">
+          <div class="row">
+            <div class="col-md-6 col-lg-4">
+              <div class="portal" id="l-t">
+                <a href="{% url 'employees:404' %}" id="portal-link">
+                  <div class="p">
+                    <img src="{% static 'employees/portal/images/portals/appointment-board.png' %}" alt="appointment-board icon">
+                    <h1>&nbsp</h1>
+                    <h2>&nbsp</h2>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <div class="portal"  id="c-t">
+                <a href="{% url 'employees:404' %}" id="portal-link">
+                  <div class="p">
+                    <img src="{% static 'employees/portal/images/portals/public-services.png' %}" alt="">
+                    <h1>&nbsp</h1>
+                    <h2>&nbsp</h2>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <div class="portal" id="r-t">
+                <a href="{% url 'employees:404' %}" id="portal-link">
+                  <div class="p">
+                    <img src="{% static 'employees/portal/images/portals/itdb.png' %}" alt="ITMS">
+                    <h1>ITMS</h1>
+                    <h2>&nbsp</h2>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <div class="portal" id="l-b">
+                <a href="{% url 'employees:404' %}" id="portal-link">
+                  <div class="p">
+                    <img src="{% static 'employees/portal/images/portals/jems.png' %}" alt="Jhpiego Employee Management System">
+                    <h1>JEMS</h1>
+                    <h2>&nbsp</h2>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <div class="portal" id="c-b">
+                <a href="{% url 'employees:404' %}" id="portal-link">
+                  <div class="p">
+                    <img src="{% static 'employees/portal/images/portals/it-support.png' %}" alt="IT Support">
+                    <h1>IT Support</h1>
+                    <h2>&nbsp</h2>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <div class="portal"  id="r-b" autofocus="autofocus">
+                <a href="{% url 'employees:extension_numbers' %}" id="portal-link">
+                  <div class="p">
+                    <img src="{% static 'employees/portal/images/portals/phonebook.svg' %}" alt="Phone book">
+                    <h1>Phone book</h1>
+                    <h2>&nbsp</h2>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-3" id="rs">
+        <div class="widgets">
+          <!-- clock widget not included for height reason -->
+          <!-- <iframe src="http://free.timeanddate.com/clock/i6ui8hq7/n113/szw150/szh150/hocfff/hbw0/cf100/hgr0/fas20/facfff/fdi86/mqc17293f/mqs2/mql3/mqw4/mqd70/mhc253a4f/mhs2/mhl3/mhw4/mhd70/mmv0/hhc17293f/hhs3/hmc17293f/hms3" frameborder="0" width="150px" height="150px" style="box-shadow: 0px 0px 10px 1px rgb(200, 200, 200); border-radius: 150px; margin: 0% 0 0 0; pointer-events: none;"></iframe> -->
+          <!-- <iframe src="http://free.timeanddate.com/clock/i6ui8hq7/n113/szw150/szh150/hoc17293f/hbw4/hfceee/cf100/hncfff/hcc17293f/hcw2/fiv0/fan2/fas18/fac17293f/fdi60/mqc253a4f/mqs3/mql25/mqw2/mqd96/mhc253a4f/mhs3/mhl20/mhw2/mhd96/mmc253a4f/mms3/mml5/mmw2/mmd96/hwm2/hhc253a4f/hhs2/hhw6/hmc253a4f/hms2/hmw6/hmr4/hsl90" frameborder="0" width="150" height="150" style="box-shadow: 0px 0px 10px 1px rgb(200, 200, 200); border-radius: 150px; margin: 0% 0 0 0; pointer-events: none;"></iframe> -->
+
+          <!-- weather widgets -->
+          <div class="weather weather-7">
+            <a class="weatherwidget-io" href="https://forecast7.com/en/34d5669d21/kabul/" data-label_1="KABUL" data-label_2="WEATHER" data-font="Roboto" data-icons="Climacons Animated" data-theme="weather_one" style=" border-radius: 10px; margin:auto;" >KABUL WEATHER</a>
+            <script>
+              !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+            </script>
+          </div>
+
+          <div class="weather weather-3">
+            <a class="weatherwidget-io" href="https://forecast7.com/en/34d5669d21/kabul/" data-label_1="KABUL" data-label_2="WEATHER" data-font="Roboto" data-icons="Climacons Animated" data-mode="Forecast" data-days="3" data-theme="weather_one" style=" border-radius: 10px; margin:auto;" >KABUL WEATHER</a>
+            <script>
+              !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+            </script>
+          </div>
+
+          <!-- calendar widget -->
+          <div class="calendar">
+            <iframe src="https://calendar.google.com/calendar/embed?height=300&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FKabul&amp;src=ZW4uYWYjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=ZW4uaXNsYW1pYyNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%233F51B5&amp;color=%23D50000&amp;color=%230B8043&amp;showTitle=0&amp;showNav=1&amp;showDate=1&amp;showPrint=1&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0" style="border-width:0;  border-radius: 10px; padding:10px;background-color:#fefefe;" width="100%" height="320" frameborder="0" scrolling="no"></iframe>
+          </div>
+
+
+          <div class="shortcuts">
+            <div class="tooltip show"><a href="https://www.taghvim.com/#fcalendar"><img src="{% static 'employees/portal/images/links/shortcuts/calendar.png' %}" alt="calendar"></a><span class="tooltiptext tooltip-top">Hijri Calendar</span></div>
+            <div class="tooltip show"><a href="https://ahg.af/home/calendar"><img src="{% static 'employees/portal/images/links/shortcuts/date-converter.svg' %}" alt="date-converter"></a><span class="tooltiptext tooltip-top">Date Converter</span></div>
+            <div class="tooltip show"><a href="https://translate.google.com/#view=home&op=translate&sl=auto&tl=fa"><img src="{% static 'employees/portal/images/links/shortcuts/translate.svg' %}" alt="Google-Translate-logo"></a><span class="tooltiptext tooltip-top">G Translate</span></div>
+            <div class="tooltip show"><a href="https://www1.oanda.com/currency/converter/"><img src="{% static 'employees/portal/images/links/shortcuts/currency.png' %}" alt="currency"></a><span class="tooltiptext tooltip-top">Currency</span></div>
+            <div class="tooltip show"><a href="https://www.unitconverters.net/"><img src="{% static 'employees/portal/images/links/shortcuts/measuring.svg' %}" alt="measuring"></a><span class="tooltiptext tooltip-top">Unit Converter</span></div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+<script>
+  $(document).ready(function(){
+
+    jQuery.fn.center = function () {
+    this.css("position","absolute");
+    this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + 
+                                                $(window).scrollTop()) + "px");
+    this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + 
+                                                $(window).scrollLeft()) + "px");
+    return this;
+}
+$(".container-fluid").center();
+});
+</script>
+</html>

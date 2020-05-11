@@ -1,0 +1,71 @@
+<!--Designed By Matin Naqshbandi-->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <title>Service Under Development</title>
+  <link rel="icon" type="image/gif" href="{% static 'employees/portal/images/icon.gif' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'employees/portal/bootstrap/css/bootstrap.css' %}">
+  <style media="screen">
+  @keyframes onload {
+    0%{
+      opacity: 0;
+   }
+
+    100%{
+      opacity: 1;
+    }
+  }
+    body{
+      background-color: #fff;
+      animation-name: onload;
+      animation-duration: 1s;
+      text-align: center;
+    }
+    img{
+      width: 100%;
+      margin: 3% 0;
+    }
+    .row{
+      background-color: whtie;
+    }
+    #portrait{
+      display: none;
+    }
+    @media screen and (max-width: 992px){
+      #portrait{
+        display: block;
+        width: 80%;
+      }
+      #landscape {
+        display: none;
+      }
+
+    }
+  </style>
+
+
+</head>
+ <body>
+   <div class="container">
+
+     <div class="row justify-content-center">
+       <div class="col-lg-4">
+           <div class="logo">
+             <a href="{% url 'employees:index' %}"><img src="{% static 'employees/portal/images/jhpiego-logo-transparent.png' %}" alt="Jhpiego Logo"></a>
+           </div>
+       </div>
+     </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <a href="{% url 'employees:index' %}" id="landscape"><img src="{% static 'employees/portal/images/404/img1.jpg' %}" alt="404 error image"></a>
+      </div>
+
+        <a href="{% url 'employees:index' %}" id="portrait"><img src="{% static 'employees/portal/images/404/img2.jpg' %}" alt="404 error image"></a>
+    </div>
+
+    </div>
+  </body>
+  </html>
