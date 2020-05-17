@@ -2,9 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
+@login_required
 def index_view(request):
-	return render(request, "portal/index.html")
+	return render(request, "ui/index.html")
 
 def not_found_view(request):
     return render(request, "portal/404.html")
