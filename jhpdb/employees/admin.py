@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (Employee, Province, Site, Department, Position, ExtensionNumber)
+from .models import (Employee, Province, Site, Department, Position)
 from reversion.admin import VersionAdmin
 from simple_history.admin import SimpleHistoryAdmin
 from import_export.admin import ImportExportModelAdmin
@@ -28,8 +28,8 @@ class CustomUserAdmin(UserAdmin):
 #         return super(CustomUserAdmin, self).get_inline_instances(request, obj)
 
 class EmployeeAdmin(VersionAdmin, SimpleHistoryAdmin, ImportExportModelAdmin):
-    fieldsets = [ ('Employee Information', {'fields': ['user', 'province', 'site', 'department','position','hire_date','contract', 'phonenumber', 'skype']})]
-    list_display = ['user', 'department','position', 'province','site', 'hire_date', 'contract','is_hired_recently', 'timeuntil_out_of_contract', 'phonenumber', 'skype']
+    fieldsets = [ ('Employee Information', {'fields': ['user', 'province', 'site', 'department','position','hire_date','contract_end_date', ]})]
+    list_display = ['user', 'department','position', 'province','site', 'hire_date', 'contract_end_date', 'timeuntil_out_of_contract', 'is_hired_recently' ]
     list_filter = ['department', 'position']
     date_hierarchy = 'hire_date'
     raw_id_fields = ("user",)
@@ -58,11 +58,6 @@ class SiteAdmin(VersionAdmin, SimpleHistoryAdmin, ImportExportModelAdmin):
     list_display = ('province','site')
     change_list_template = "admin/change_list.html"
 
-class ExtensionNumberAdmin(VersionAdmin, SimpleHistoryAdmin, ImportExportModelAdmin):
-    fieldsets = [ ('Extension Numbers', {'fields': ['department', 'office', 'extension_number']})]
-    list_display = ('department', 'office', 'extension_number')
-    change_list_template = "admin/change_list.html"
-
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
@@ -72,4 +67,3 @@ admin.site.register(Site, SiteAdmin)
 admin.site.register(Department, DepartmentAdmin)
 admin.site.register(Position, PositionAdmin)
 # register(User) #for django simple history
-admin.site.register(ExtensionNumber, ExtensionNumberAdmin)

@@ -122,8 +122,10 @@ class Employee(models.Model):
                             sort=True, default=6#default=Main Office
                             )
     hire_date = models.DateField('Date Hired', default = timezone.now, null=True, blank=True)
-    contract = models.IntegerField('Contract Months', default = 1, validators=[MaxValueValidator(100), MinValueValidator(1)])
-    department = models.ForeignKey(Department, on_delete = models.PROTECT, default=9)#default=NotSpecified
+    contract_end_date = models.DateField('End of contract', null=True, blank=True)
+
+
+    department = models.ForeignKey(Department, on_delete = models.PROTECT, default=9)  #default=NotSpecified
     position = ChainedForeignKey(Position, 
                                 chained_field="department", 
                                 chained_model_field="department", 
@@ -131,42 +133,25 @@ class Employee(models.Model):
                                 auto_choose=True, 
                                 sort=True, default=10#default=NotSpecified
                                 )
-    phonenumber = models.CharField(max_length=10, null=True, blank=True, unique=True, validators=[RegexValidator
-                                                                            (regex='[0][7][02346789][0-9]{7}',
-                                                                            message='Invalid Afghanistan Phone number',
-                                                                            code='invalid_phone_number'),])
-    skype = models.CharField(max_length=31, null=True, blank=True, unique=True, validators=[RegexValidator
-                                                                            (regex='[a-zA-Z][a-zA-Z0-9\.,\-_]{5,31}',
-                                                                            message='Invalid Skype ID',
-                                                                            code='invalid_skype_id'),])
+
     history = HistoricalRecords()
 
+# Needs revision:
     def timeuntil_out_of_contract(self):
-        if date.today() >= self.hire_date + datetime.timedelta(days=self.contract*30):
+        if date.today() > self.contract_end_date:
             return ('Out of contract')
         else:
             # (timeuntil(self.hire_date + datetime.timedelta(days=self.contract*29)) , 'left')
-            return (self.hire_date + datetime.timedelta(days=self.contract*30))
+            return self.contract_end_date - date.today()
+            # return (self.hire_date + datetime.timedelta(days=self.contract*30))
     timeuntil_out_of_contract.admin_order_field = 'hire_date'
     timeuntil_out_of_contract.short_description = 'Contract info'
 
     def is_hired_recently(self):
-        return self.hire_date >= date.today() - datetime.timedelta(days = 7)
+        return self.hire_date >= date.today() - datetime.timedelta(days = 14)
     is_hired_recently.admin_order_field = 'hire_date'
     is_hired_recently.boolean = True
     is_hired_recently.short_description = 'Hired recently?'
 
     def __str__(self):
         return self.user.username
-
-class ExtensionNumber(models.Model):
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
-    office = models.CharField(max_length=255)
-    extension_number = models.CharField(max_length=3, unique=True, validators=[RegexValidator
-                                                                            (regex='[6][0-4][0-9]',
-                                                                            message='Invalid Extension number',
-                                                                            code='invalid_extension_number'),])
-    history = HistoricalRecords()
-    def __str__(self):
-        return self.extension_number
-    
