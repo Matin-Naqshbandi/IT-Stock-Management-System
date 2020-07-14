@@ -9474,8 +9474,9 @@ button,
 }
 .vertical-nav-menu li.mm-active > a i.metismenu-state-icon {
   transform: rotate(-180deg);
+
 }
-.vertical-nav-menu li a.mm-active {
+.vertical-nav-menu li a.mm-active{
   color: #343a40;
   background: #e0f3ff;
   font-weight: bold;
@@ -9984,6 +9985,7 @@ button,
 }
 .app-page-title .page-title-icon i {
   margin: auto;
+  font-weight: bold;
 }
 .app-page-title .page-title-icon.rounded-circle {
   margin: 0 20px 0 0;

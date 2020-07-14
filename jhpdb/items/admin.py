@@ -43,15 +43,20 @@ class ManufacturerAdmin(VersionAdmin, SimpleHistoryAdmin, ImportExportModelAdmin
 
 class CategoryAdmin(VersionAdmin, SimpleHistoryAdmin, ImportExportModelAdmin):
     fieldsets = [('Category Information: ', {'fields': ['name', 'manufacturers']})]
-    list_display = ['name']
+    list_display = ['name', 'get_manufacturers']
     filter_horizontal = ['manufacturers',]
     list_filter = ['manufacturers',]
+    search_fields = ['name',]
     change_list_template = "admin/change_list.html"
+
+    def get_manufacturers(self, obj):
+        return ", ".join([m.name for m in obj.manufacturers.all()])
 
 class ModelAdmin(VersionAdmin, SimpleHistoryAdmin, ImportExportModelAdmin):
     fieldsets = [('Model Information: ', {'fields': ['manufacturer', 'category', 'name', 'item_count', 'expendable']})]
     list_display = ['name', 'category', 'manufacturer', 'item_count', 'item_in_stock', 'item_assigned', 'item_expended','item_lost', 'item_damaged', 'expendable']
     list_filter = ['category', 'manufacturer', 'expendable']
+    search_fields = ['name',]
     change_list_template = "admin/change_list.html"
 
 class ItemAssignAdmin(VersionAdmin, SimpleHistoryAdmin, ImportExportModelAdmin):

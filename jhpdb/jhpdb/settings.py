@@ -26,7 +26,7 @@ SECRET_KEY = 'm8dmsd48nqpt82z6z6w*c47zp^00#z=&0pbvp0#1=b^7%6ys$p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites', #needed for django-allauth
+    'django.contrib.humanize',
     # local apps
     'employees.apps.EmployeesConfig',
     'items.apps.ItemsConfig',

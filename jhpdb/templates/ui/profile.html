@@ -1,0 +1,83 @@
+{% extends "ui/base.html" %}
+{% load static %}
+{% load humanize %}
+<!-- highlight selected option in sidebar-->
+{% block myprofile %}
+    class="mm-active"
+{% endblock myprofile %}
+<!-- highlight selected option in sidebar-->
+
+{% block content %}
+<style>
+    th{
+        width: 20%;
+    }
+    td{
+        color: black;
+    }
+</style>
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-id icon-gradient bg-amy-crisp">
+                </i>
+            </div>
+            <div>My Profile Dashboard
+                <div class="page-title-subheading">All your information accessable by IT department.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>            
+<div class="row">
+    <div class="col-lg-12">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <table class="mb-0 table table-striped table-borderless">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Username</th>
+                        <td>{{user.username}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Full Name</th>
+                        <td>{{user.first_name}} {{user.last_name}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email address</th>
+                        <td>{{user.email}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Position, Department</th>
+                        <td>{{user.employee.position}}, {{user.employee.department}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Site, Province</th>
+                        <td>{{user.employee.site}}, {{user.employee.province}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Date Hired</th>
+                        <td>{{user.employee.hire_date}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Contract End</th>
+                        <td>{{user.employee.timeuntil_out_of_contract}}, ({{user.employee.timeuntil_out_of_contract|timeuntil}} left)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Password</th>
+                        <td>
+                            <a href="{% url 'account_change_password' %}">
+                                <div class="btn btn-info">Change password</div>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

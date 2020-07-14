@@ -145,7 +145,8 @@ class Employee(models.Model):
         if date.today() >= self.hire_date + datetime.timedelta(days=self.contract*30):
             return ('Out of contract')
         else:
-            return (timeuntil(self.hire_date + datetime.timedelta(days=self.contract*29)) , 'left')
+            # (timeuntil(self.hire_date + datetime.timedelta(days=self.contract*29)) , 'left')
+            return (self.hire_date + datetime.timedelta(days=self.contract*30))
     timeuntil_out_of_contract.admin_order_field = 'hire_date'
     timeuntil_out_of_contract.short_description = 'Contract info'
 
